@@ -16,9 +16,8 @@ connection()
 app.use(express.json())
 
 // routes
-app.use("/api/admin", require("./routes/admin/admins"));
-app.use("/api/auth", require("./routes/user/auth"));
-app.use("/api/users", require("./routes/user/users"));
+app.use("/api/admin", require("./routes/admins"));
+app.use("/api/users", require("./routes/users"));
 
 // last middleware
 app.use(errorsHandler)
