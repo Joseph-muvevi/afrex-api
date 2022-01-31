@@ -8,10 +8,7 @@ exports.userregister = async (req, res, next) => {
 	try {
 		const user = await User.create({username, email, password})
 
-		res.status(201).json({
-			success: true,
-			user
-		})
+		sendToken(user, 201, res)
 	} catch (error) {
 		next(error)
 	}
@@ -38,7 +35,7 @@ exports.userlogin = async  (req, res, next) => {
 			return next(new ErrorResponse("Invalid credentials", 400))
 		}
 
-		res.send("You are logged in")
+		sendToken(user, 200, res)		
 
 	} catch (error) {
 		next(error)
@@ -59,9 +56,12 @@ exports.userget = async (req, res, next) => {
 	}
 }
 
-// const response = (statusCode,res) => {
-// 	res.status(statusCode).json({
-// 		success: true,
-// 		data
-// 	})
-// }
+// refactoring sending token function
+const sendToken = (user, statusCode, res) => {
+	const token = user.genSignToken()
+
+	res.status(statusCode).json({
+		success: true,
+		token
+	})
+}
