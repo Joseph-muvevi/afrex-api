@@ -1,0 +1,23 @@
+{
+  "name": "afrex-backend",
+  "version": "1.0.0",
+  "description": "afrex backend and APIS",
+  "main": "index.js",
+  "author": "Joseph Muvevi",
+  "license": "MIT",
+  "scripts": {
+    "server": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "crypto": "^1.0.1",
+    "dotenv": "^15.0.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.8",
+    "nodemailer": "^6.7.2",
+    "nodemon": "^2.0.15",
+    "winston": "^3.5.0"
+  }
+}
