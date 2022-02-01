@@ -50,6 +50,22 @@ UserSchema.methods.genSignToken = function(){
 	})
 }
 
+// generating reset passwrd token
+UserSchema.methods.genResetToken = function (){
+	const resetToken = crypto.randomBytes(20).toString("hex");
+
+	// hashing the made up token
+	this.resetPasswordToken = crypto
+		.createHash("sha256")
+		.update(resetToken)
+		.digest("hex")
+	
+	// dealing with token expiry
+	this.resetPasswordExpiry = Date.now() + 15*(60*1000)
+	
+	return resetToken
+}
+
 // the user model
 const User = mongoose.model("User", UserSchema);
 

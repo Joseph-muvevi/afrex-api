@@ -7,8 +7,8 @@ exports.userregister = async (req, res, next) => {
 
 	try {
 		const user = await User.create({username, email, password})
-
 		sendToken(user, 201, res)
+		
 	} catch (error) {
 		next(error)
 	}
@@ -42,7 +42,7 @@ exports.userlogin = async  (req, res, next) => {
 	}
 }
 
-
+// get all users
 exports.userget = async (req, res, next) => {
 
 	try {
@@ -53,6 +53,36 @@ exports.userget = async (req, res, next) => {
 		})
 	} catch (error) {
 		next(error)
+	}
+}
+
+// forgot user password
+exports.forgotPassword = async (req, res, next) => {
+	const {email} = req.body
+	
+	try {
+		const user = await User.findOne({email})
+
+		if(!user) {
+			return next(new ErrorResponse("Email could not be send", 400))
+		}
+
+		const resetToken = user.genResetToken()
+		user.save()
+
+		// the reset token link
+		const resetUrl = `http://localhost:5001/passwordreset/${resetToken}`
+
+		// the inbox message
+		const message = `
+			<h2>You requested a password reset</h2>
+			<p>You have requested a password reset If you have not please ignore. </p>
+			<p>Click the link below to reset your password. </p>
+			<a href=${resetUrl} clicktracking=off>${resetUrl}</a>
+		`
+
+	} catch (error) {
+		
 	}
 }
 
