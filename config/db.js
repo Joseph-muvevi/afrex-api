@@ -6,7 +6,7 @@ const connectDB = async () => {
 		useUnifiedTopology: true
 	});
 
-	console.log("Connected to DB")
+	console.log("Connected to the Database")
 }
 
 module.exports = connectDB

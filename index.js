@@ -1,34 +1,28 @@
-require("dotenv").config({path : "./config.env"});
-
-// package imports
+// npm module imports
+require("dotenv").config({path: "./config.env"});
 const express = require("express");
 
-// file imports
-const connection = require("./database/db");
-const errorsHandler = require("./middleware/error");
+// custom modules
+const connectDB = require("./config/db");
+const errorHandler = require("./middleware/error");
 
+// running the imports
 const app = express();
-
-// database
-connection()
+connectDB();
 
 // middleware
-app.use(express.json())
+app.use(express.json());
+app.use("/api/admin", require("./routes/admin"));
 
-// routes
-app.use("/api/admin", require("./routes/admins"));
-app.use("/api/users", require("./routes/users"));
-
-// last middleware
-app.use(errorsHandler)
+// error ctaching middleware
+app.use(errorHandler)
 
 // port
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 7000
+app.listen(PORT, () => console.log(`Connected to port: ${PORT}`));
 
-const server = app.listen(PORT, () => console.log(`Running on port ${PORT}`))
-
-// unhandles rejection termination
-process.on("unhandledRejection", (err, promise) => {
-	console.log(`Logged Error: ${err.message}`);
-	server.close(() => process.exit(1));
-});
+// process termination
+process.on("unhandledRejection", (reason, promise) => {
+	console.log(`Unhandled Promise Rejection Error : ${reason}`)
+	process.exit(1)
+})
