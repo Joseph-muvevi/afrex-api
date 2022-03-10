@@ -85,7 +85,7 @@ exports.adminForgotPassword = async (req, res, next) => {
 
 		// sending the email
 		try {
-			await sendEmail({
+			sendEmail({
 				to: admin.email,
 				subject: "Password Reset",
 				text: message

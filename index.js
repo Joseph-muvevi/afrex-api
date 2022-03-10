@@ -13,6 +13,7 @@ connectDB();
 // middleware
 app.use(express.json());
 app.use("/api/admin", require("./routes/admin"));
+app.use("/api/user", require("./routes/user"));
 
 // error ctaching middleware
 app.use(errorHandler)

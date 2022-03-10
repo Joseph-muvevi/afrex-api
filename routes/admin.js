@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    registerAdmin,
-    adminLogin,
-    adminForgotPassword,
-    adminResetPassword
+	registerAdmin,
+	adminLogin,
+	adminForgotPassword,
+	adminResetPassword
 } = require("../controllers/admin");
 
 router.route("/register").post(registerAdmin);
