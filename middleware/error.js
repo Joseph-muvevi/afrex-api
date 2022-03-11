@@ -7,6 +7,7 @@ const errorHandler = (err, req, res, next) => {
 	if(err.code === 11000){
 		const message = "Mongoose Duplication Error"
 		error = new ErrorResponse(message, 500)
+		console.log(err)
 	}
 
 	if(err.name === "ValidationError"){

@@ -29,7 +29,6 @@ const ParagraphSchema = new mongoose.Schema({
 		trim: true,
 		minlength: [20, "The minimum allowed characters is 20"],
 		maxlength: [1000, "The minimum allowed characters is 1000"],
-		unique: [true, "The paragraphs have to be unique"],
 		required: [true, "Please add a paragraph"]
 	}
 })
@@ -48,7 +47,6 @@ const ListSchema = new mongoose.Schema({
 		minlength: [20, "The minimum allowed characters is 20"],
 		maxlength: [1000, "The minimum allowed characters is 1000"],
 		required: [true, "Please add a paragraph"],
-		unique: [true, "The lists have to be unique"],
 	}
 })
 
@@ -74,8 +72,8 @@ const BlogSchema = new mongoose.Schema({
 	},
 	paragraphBlock: {
 		type: [ParagraphSchema],
-		min: [1, "The minimum allowed paragraph block is one"],
-		max: [10, "The maximum allowed paragraph blocks are ten"],
+		min: [1, "The minimum allowed paragraph per block is one"],
+		max: [10, "The maximum allowed paragraph per blocks are ten"],
 	},
 	listBlock: {
 		type: [ListSchema],
@@ -84,9 +82,9 @@ const BlogSchema = new mongoose.Schema({
 	},
 	tags: {
 		type: Array,
-		min: [1, "The minimum allowed tag is one"],
+		min: [3, "The minimum allowed tag is one"],
 		max: [10, "The maximum allowed tags are ten"],
-		required: true
+		required: [, "Please add atleast one three tags"]
 	},
 }, {timestamps: true})
 
