@@ -15,6 +15,7 @@ app.use(express.json());
 app.use("/api/admin", require("./routes/admin"));
 app.use("/api/user", require("./routes/user"));
 app.use("/api/blogs", require("./routes/blogs"))
+app.use("/api/tasks", require("./routes/tasks"));
 
 // error ctaching middleware
 app.use(errorHandler)

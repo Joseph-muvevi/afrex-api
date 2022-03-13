@@ -28,10 +28,10 @@ const TaskSchema = new mongoose.Schema({
 		maxlength: [100, "The task date should not exceed  one hundred characters"],
 		required: [true, "Please add the task's due date"]
 	},
-	urgency: {
+	priority: {
 		type: String,
-		minlength: [5, "The task urgency field should have a minimum of five characters"],
-		maxlength: [100, "The task urgency field should not exceed  one hundred characters"],
+		minlength: [3, "The task priority field should have a minimum of five characters"],
+		maxlength: [100, "The task priority field should not exceed  one hundred characters"],
 	},
 	isCompleted: {
 		type: Boolean,
